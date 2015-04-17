@@ -1,6 +1,6 @@
 # meteor-spiderable-test
 
-work in progress: just a test to see if spiderable is working 
+work in progress: just a test to see if spiderable2 is working 
 
 start with
 `````bash
@@ -22,4 +22,12 @@ should contain __testdata-n__
 <li>testdata-3</li> 
 <li>testdata-4</li> 
 ...
+`````
+
+server verbose should show
+`````bash
+Loading page content from: http://localhost:3000/
+The page is now ready.
+The page is now loaded
+Returning page content to request.
 `````
