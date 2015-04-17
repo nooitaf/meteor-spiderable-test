@@ -1,23 +1,35 @@
+var Testdata = new Mongo.Collection('testdata')
+
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
+  Router.map(function(){
+    this.route('home',{
+      path:'/',
+      data: function () { return Testdata.findOne(); }
+    });
+  })
+     
+
+  Template.home.helpers({
+    testdata: function () {
+      return Testdata.find();
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
 }
 
 if (Meteor.isServer) {
+
   Meteor.startup(function () {
-    // code to run on server at startup
+    if (!Testdata.findOne()){
+      _(5).times(function(n){
+        Testdata.insert({name: 'testdata-' + n});
+      })
+    }
   });
+
+  Meteor.publish('testdata',function(){
+    return Testdata.find();
+  })
+  
 }
